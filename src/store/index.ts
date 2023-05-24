@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import L from 'leaflet'
 import { Feature, Point, Polygon } from 'geojson'
+import { icon } from '@/utils'
 interface Dialog {
     type: 'error' | 'success',
     messenge: string
@@ -58,7 +59,7 @@ export const useMapStore = defineStore('map', {
             this.filteredFeaturesGroup.addTo(this.map as L.Map)
             features.forEach(f => {
                 const [lon, lat] = f.geometry.coordinates
-                L.marker([lat, lon])
+                L.marker([lat, lon], { icon: icon })
                     .bindPopup(`${lat},${lon}`)
                     .addTo(this.filteredFeaturesGroup as L.FeatureGroup)
             })
